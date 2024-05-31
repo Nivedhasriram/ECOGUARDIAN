@@ -4,15 +4,11 @@ import { BrowserRouter as Router } from 'react-router-dom'; // Import BrowserRou
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import LandPollution from './components/Landpollution';
-import AirPollution from './components/Airpollution';
-import WaterPollution from './components/Waterpollution';
-import PollutionTracker from './components/PollutionTracker';
 
 ReactDOM.render(
   <Router> {/* Wrap your App component with Router */}
     <React.StrictMode>
-      <PollutionTracker />
+      <App />
     </React.StrictMode>
   </Router>,
   document.getElementById('root')
