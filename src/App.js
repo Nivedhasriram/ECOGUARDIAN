@@ -6,7 +6,6 @@ import { Skills } from "./components/Skills";
 import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Footer } from "./components/Footer";
-import AirPollution from './components/Airpollution';
 import AirQualityInfo from './components/PollutionTracker';
 
 
@@ -17,6 +16,7 @@ function App() {
         <NavBar />
         <Banner />
         <Skills />
+        <AirQualityInfo />
         <Projects />
         <Contact />
         <Footer />
