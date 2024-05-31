@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { NavBar } from "./NavBar.js";
 
 const notify = (message, type = "error") => toast[type](message);
 
@@ -45,13 +44,13 @@ const AirQualityInfo = () => {
     if (!airQuality) return false;
     // Define threshold values for pollutants
     const thresholds = {
-      co: 1000,
+      co: 100,
       no2: 40,
       o3: 100,
-      so2: 80,
-      pm2_5: 30,
-      pm10: 50,
-      nh3: 200
+      so2: 100,
+      pm2_5: 10,
+      pm10: 20,
+      nh3: 0
     };
     // Check if any pollutant exceeds its threshold
     for (let pollutant in thresholds) {
@@ -65,19 +64,19 @@ const AirQualityInfo = () => {
   const pollutionSolutions = [
     {
       pollutant: "CO",
-      threshold: 200,
+      threshold: 100,
       solution: ["Promote cleaner transportation: Encourage the use of electric vehicles, bicycles, and public transportation to reduce emissions from combustion engines."
       , "Reduce industrial emissions: Implement stricter regulations on industrial processes to minimize CO emissions."]
     },
     {
       pollutant: "NO2",
-      threshold: 200,
+      threshold: 40,
       solution: ["Promote cleaner transportation: Encourage the use of electric vehicles and public transportation to reduce emissions from vehicles."
       , "Improve waste management: Implement proper waste disposal and recycling programs to reduce emissions from landfills, which can contribute to NO2 levels."]
     },
     {
         pollutant: "O3",
-        threshold: 500,
+        threshold: 100,
         solution: ["Promote cleaner transportation: Reduce emissions from vehicles by promoting the use of electric vehicles and improving public transportation infrastructure."
         , "Reduce industrial emissions: Implement cleaner production processes and technologies to minimize the release of ozone precursors into the atmosphere."]
     },
@@ -89,19 +88,19 @@ const AirQualityInfo = () => {
     },
     {
         pollutant: "PM2_5",
-        threshold: 500,
+        threshold: 10,
         solution: ["Promote cleaner transportation: Reduce emissions from vehicles by promoting the use of electric vehicles, improving fuel efficiency, and enforcing vehicle emission standards."
         , "Reduce industrial emissions: Implement measures such as dust control, emission controls, and the use of cleaner production technologies to reduce particulate matter emissions from industrial sources."]
     },
     {
         pollutant: "PM10",
-        threshold: 500,
+        threshold: 20,
         solution: ["Promote cleaner transportation: Reduce emissions from vehicles by promoting the use of electric vehicles, improving fuel efficiency, and enforcing vehicle emission standards."
         , "Reduce industrial emissions: Implement measures such as dust control, emission controls, and the use of cleaner production technologies to reduce particulate matter emissions from industrial sources."]
     },
     {
         pollutant: "NH3",
-        threshold: 500,
+        threshold: 0,
         solution: ["Promote cleaner transportation: Encourage the use of vehicles with low emissions and promote the adoption of electric vehicles and alternative fuels."
         , "Reduce industrial emissions: Implement measures to minimize ammonia emissions from agricultural activities, such as optimizing fertilizer application practices and using ammonia capture technologies."]
     },
@@ -112,8 +111,10 @@ const AirQualityInfo = () => {
   }, [airQuality]);
 
   return (
+    <section className="pollutiontracker" id="Pollutiontracker">
       <div className="container1">
-      <h1 className="title">Air Quality Information</h1>
+      <h1 className="title">Pollution Tracker</h1>
+      <p id="pollution">Enter your city name to find out the Air pollution rates in your neighbourhood!</p>
       <div className="form">
         <input
           type="text"
@@ -131,8 +132,8 @@ const AirQualityInfo = () => {
         <div className={`details ${isPolluted(airQuality) ? 'polluted' : ''}`}>
           <h2 className="subtitle">Air Quality Details</h2>
           <ul>
-            {Object.entries(airQuality).map(([key, value]) => (
-              <li key={key} className={value > 1000 ? 'polluted-gas' : ''}>
+          {Object.entries(airQuality).map(([key, value]) => (
+              <li key={key} className={value > 50 ? 'polluted-gas' : ''}>
                <span style={{ textTransform: 'uppercase' }}>{key}:</span> <span>{value} μg/m3</span>
               </li>
             ))}
@@ -159,7 +160,9 @@ const AirQualityInfo = () => {
         </div>
       )}
     </div>
+    </section>
   );
 };
 
 export default AirQualityInfo;
+
